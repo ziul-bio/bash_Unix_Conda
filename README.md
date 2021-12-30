@@ -21,11 +21,11 @@ Nowaday days, works as an independent biological data analyst/bioinformatician, 
 
 ## About this Project:
 
-* Here, I share with you, my way to answer to biological questions using bioinformatics.
-* In these notebooks, I describe bioinformatics tools, hoping someone could learning from it.
-* Feel here to use all and share some contribuition to improve them too.
+*  WSL is an optional feature available for Windows 10 and 11 that allows you to run Linux (binary) programs and scripts directly on Windows. 
+   This way, it is possible that we have access to a Linux terminal inside Windows. As many tools developed for bioinformatics are built natively
+   for Unix systems, we will install WSL to take advantage of these programs. 
 
-
+*  Feel here to use all and share some contribuition to improve them too.
 
 ---
 
