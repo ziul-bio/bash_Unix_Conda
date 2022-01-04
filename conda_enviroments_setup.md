@@ -17,8 +17,8 @@ source ~/.bashrc
 
 # or reinitiate the terminal.
 ```
-This command will activate the conda enviroment(Base) into the terminal, showing base to the left most of the line.
-With this, if everything goes correctly, there is no need to type this command for future use.
+This command will activate the conda enviroment(Base) into the terminal, showing base at the left most side of the line.
+Then, if everything goes correctly, there will be no need to type this command for future use.
 
 ## After instalation of miniconda,
 if conda base enviroment is not set by default, its possible to set the conda base enviroment to activate automaticly or not.
