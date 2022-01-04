@@ -5,21 +5,20 @@
 wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh
 ```
 
-## Executar o instalador
+## install Miniconda
 ```bash
 bash Miniconda3-py39_4.10.3-Linux-x86_64.sh
 ```
 
-Por padrão, o Anaconda será instalado na pasta home do usuário. 
-Para verificar se tudo foi instalado corretamente e está com as configurações corretas digite:
+By default, miniconda will be installed at the home directoty.
+To verify if every thing were installed and configured correctly, type the command:  
 ```bash
 source ~/.bashrc
 
-# Ou feche e abra novamente o terminal.
+# or reinitiate the terminal.
 ```
-
-Este comando irá ativar o ambiente Anaconda (ou somente Conda) dentro do terminal, aparecendo (base) à esquerda da linha. 
-Não será mais necessário executar esse comando ao abrir novamente o terminal.
+This command will activate the conda enviroment(Base) into the terminal, showing base to the left most of the line.
+With this, if everything goes correctly, there is no need to type this command for future use.
 
 ## After instalation of miniconda,
 if conda base enviroment is not set by default, its possible to set the conda base enviroment to activate automaticly or not.
@@ -32,17 +31,18 @@ conda config --set auto_activate_base false
 ```
 
 
-# -------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------
  
-*Caso a base não seja ativada automáticamente, será preciso editar o arquivo .bashrc na pasta home do usuário.
-Para isso digite o comando a abaixo: onde "nome do usuário" = nome de usuário no Linux.
-Este comando escreverá no arquivo .bashrc o caminho para ativar a base*.
+*In case of the env base wasn't automatic activate, will be necessary edit the .basrc file 
+in the user's home directory.
+For this, type the follow command: where "user_name" = the name of your linux user*.
 
 ```bash
 echo 'PATH=/home/nome_do_usuário/miniconda3/bin:$PATH' >> ~/.bashrc
 ```
+This command will wright into the file .bashrc the path to activate the base.
 
-# -------------------------------------------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------------------
 
 
 # Config the channels
