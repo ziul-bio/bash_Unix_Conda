@@ -31,7 +31,7 @@ conda config --set auto_activate_base false
 ```
 
 
-# -----------------------------------------------------------------------------------------
+#
  
 *In case of the env base wasn't automatic activate, will be necessary edit the .basrc file 
 in the user's home directory.
@@ -42,7 +42,7 @@ echo 'PATH=/home/nome_do_usuário/miniconda3/bin:$PATH' >> ~/.bashrc
 ```
 This command will wright into the file .bashrc the path to activate the base.
 
-# -----------------------------------------------------------------------------------------
+#
 
 
 # Config the channels
