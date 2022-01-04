@@ -40,7 +40,7 @@ For this, type the follow command: where "user_name" = the name of your linux us
 ```bash
 echo 'PATH=/home/nome_do_usuário/miniconda3/bin:$PATH' >> ~/.bashrc
 ```
-This command will wright into the file .bashrc the path to activate the base.
+This command will write into the file .bashrc the path to activate the base.
 
 #
 
