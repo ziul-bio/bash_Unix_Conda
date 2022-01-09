@@ -1,4 +1,4 @@
-# WSL2 a Good Alternative to Use UNIX Systems
+    # WSL2 a Good Alternative to Use UNIX Systems
 ### Autor Luiz Carlos
 Date: 30/12/2021
 
@@ -37,7 +37,7 @@ The follow command must be run in PowerShell as Administrator user.
 ```cmd
 wsl --shutdown
 diskpart
-select vdisk file="C:\Users\User_\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu20.04onWindows_79rhkp1fndgsc\LocalState\ext4.vhdx"
+select vdisk file="C:\Users\"change_for_your_user_name"\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu20.04onWindows_79rhkp1fndgsc\LocalState\ext4.vhdx"
 attach vdisk readonly
 compact vdisk
 detach vdisk

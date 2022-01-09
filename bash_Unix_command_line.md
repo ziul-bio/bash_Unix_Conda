@@ -118,10 +118,11 @@ Note 1: that if the destination exists, it will be overwritten unless the -i opt
 
 Note 2: If a file or directory is moved to a new name within the same directory, it is effectively renamed.   
 
-For example, this would rename a file from oldname to newname.
+### Rename a file
 ```bash
 mv -i oldname newname
 ```
+
 
 ## Creating files
 ```bash
@@ -222,9 +223,13 @@ ls {file1,file2}.png
 ## Compress and Uncompress files
 ```bash
 gzip file_name
-gunzip file_name
-
 bzip file_name
+
+
+# Uncompress files
+gunzip file_name
+gzip -d file_name
+
 bunzip file_name
 
 ```
@@ -260,6 +265,7 @@ tar -xvf colection_txt.tar
 
 # to extract a specific file from colection_txt 
 tar -xvf colection_txt.tar filename.ext
+
 
 ### Creating file grouped and compressed:
 
@@ -375,6 +381,61 @@ wc [option] [file]
 wc -l file
 ```
 
+## sed
+
+SED command in UNIX stands for stream editor and it can perform lots of functions on file like searching, find and replace, insertion or deletion.
+
+Usage:
+
+sed OPTIONS... [SCRIPT] [INPUTFILE...]
+
+options:
+-i ------> change the file in place
+-e ------> print without changing the file
+-n ------> show just the result of the command
+s -------> replace a pattern for another
+p -------> p at the end, prints
+g -------> g at the end, change all accurrences
+
+Sed command is mostly used to replace the text in a file. 
+```bash
+# Replacing or substituting string not in place: 
+sed 's/strig_to_find/new_string/' file.txt
+
+# Replacing or substituting string in place: 
+sed -i 's/strig_to_find/new_string/' file.txt
+
+# Replacing a string between lines 3 and 9: 
+sed '3,9s/strig_to_find/new_string/' file.txt
+
+# Delete all lines with the string specified
+sed -i '/string/d' file.txt
+
+# insert a string at the beginning of each line
+sed 's/^/string/' file.txt
+
+# replace all occurrences of the strings “marcos”, “luiz”, “karol” by “friends”
+sed 's/marcos\|luiz\|karol/friends/g' file.txt
+
+# Insert the string ‘#’ at the beggining of lines 1 to 8
+sed -i '1,8s/^/#/' file.txt
+
+# Substitute “foo” by “bar” onle at lines with “##”
+sed '/##/s/foo/bar/g' arquivo.txt
+
+# prints only the lines each starts with the string ‘http’
+sed -n '/^http/p' file.txt
+
+# print only the line 9
+sed -n '9p' file.txt
+
+# Print from line 6 to 9 
+sed -n '6,9p' file.txt
+
+
+```
+[link for more exemples](https://terminalroot.com.br/2015/07/30-exemplos-do-comando-sed-com-regex.html)
+
 
 ## comm
 
@@ -452,15 +513,36 @@ tree -a
 ```
 
 ## wget
+
+Wget is a command-line utility for downloading files from the web. With Wget, you can download files using HTTP, HTTPS, and FTP protocols. 
+Wget provides a number of options allowing you to download multiple files, resume downloads, limit the bandwidth, recursive downloads, 
+download in the background, mirror a website, and more.
+
+Options:  
+-nv ------> non verbose
+-O -------> Saving the downloaded file under different name 
+-P -------> Download the file into a specific directory
+-c -------> Resuming a download from the previous one
+-b -------> Downloading in background
+-i -------> Downloading multiple files (this options need to be followed by the path to a local or external file containing a list of the
+URLs to be downloaded. Each URL needs to be on a separate line).
+
+
 Downloading files from internet
 ```bash
-wget 'link to download the file'
+wget -o /mnt/c/file.txt 'link to download the file'
 ```
 
 Download a fasta file from NCBI into the PC with (eutils):
 ```bash
-wget "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=NC_045512.2&rettype=fasta" -O covid_genome.fa
+wget "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&id=NC_045512.2&rettype=fasta" -O covid_genome.fa 
 ```
+
+Download a list of fastq files:
+```bash
+wget -i urls_fastq_files.txt
+```
+
 
 
 # Shortcuts
@@ -478,6 +560,8 @@ jupyter notebook --no-browser
 'dir name'      # use of '' to acess dir with spaces in the name
 up and down arrows to show previewly command used
 ```
+
+
 
 # Creating alias to open files in wsl
 
