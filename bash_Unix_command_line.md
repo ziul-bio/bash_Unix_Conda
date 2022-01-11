@@ -221,13 +221,24 @@ ls {file1,file2}.png
 ```
 
 ## Compress and Uncompress files
+
+option:
+
+-c, --stdout    = compress but, write on standard output, keep original files unchanged  
+-k, --keep       = keep (don't delete) input files  
+-d, --decompress = decompress  
+-t, --test       = test compressed file integrity  
+-v, --verbose    = verbose mode  
+-l, --list       = list compressed file contents  
+
 ```bash
+# To compress
 gzip file_name
 bzip file_name
 
 
 # Uncompress files
-gunzip file_name
+gunzip -k file_name
 gzip -d file_name
 
 bunzip file_name
