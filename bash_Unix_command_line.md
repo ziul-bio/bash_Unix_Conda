@@ -13,8 +13,59 @@ pwd                 # Currently working directory
 history             # list of command used. It's possible to use arrow down and up to show the last 100 comands.
 clear               # clear command prompt
 cat filename.ext    # to show or execute the file
-bash file.sh        # run the executable
 ```
+
+## Running scripts
+```bash
+# simple run
+bash script.sh
+
+# Run in second plan
+bash script.sh &
+
+# redirect both stdout and stderr to file.log.txt
+bash script.sh >& script.log.txt
+
+# to run the scrip withou hang up, redirect both stdout and stderr to file.log.txt and run in second plan
+nohup sh script.sh >& script.log.txt &
+
+```
+
+## Running scripts with a conda env setup
+This kind of running is required when we need to activate a conda env, where all the programs needed to run the script are.
+
+### Exemple of script
+I do recommend not use any kind of characters as (_ , - , /) in the script name.
+
+At the top of the script, starts as follow:
+
+    #!/usr/bin/env bash                # shabang sign - Tells the operating system which interpreter to use. 
+    set -o errexit                     # This will exit, if any erro happens.
+    conda activate genomics            # This will activate the env we need to execute the script, change for the one you have.
+    
+    command 1
+    command 2
+    command 3
+
+
+Before run any command, let's ussume we have a env called genomics, and there are all the programs needed to execute the following script.
+```bash
+# Note: this script starts as showed above.
+
+# running in interactive mode.
+bash -i script2.sh
+
+# redirect both stdout and stderr to file.log.txt
+bash -i script2.sh >& script2.log.txt
+
+
+# Now, let's assume we don't wrote in the script to activate genomics
+# We can open the terminal and do as follow:
+conda activate genomics
+./script2.sh >& script2.log.txt    # This comand will run the script interacting if the current env.
+
+```
+
 
 ## List the content of a directory
 ```bash
@@ -50,10 +101,11 @@ Usage:
 mkdir [OPTION]... DIRECTORY Nane...
 ```
 
-Mandatory arguments to long options are mandatory for short options too.
-  -m, --mode=MODE   set file mode (as in chmod), not a=rwx - umask
-  -p, --parents     no error if existing, make parent directories as needed
-  -v, --verbose     print a message for each created directory
+Mandatory arguments to long options are mandatory for short options too:
+
+    -m, --mode=MODE   # set file mode (as in chmod), not a=rwx - umask
+    -p, --parents     # no error if the diretory already exist, make parent directories as needed
+    -v, --verbose     # print a message for each created directory
 
 ## Remove files and directories
 ```bash
@@ -78,10 +130,11 @@ cd ../../   # move two directory up
 ## Copy Files and Directories
 
 Common options used with the cp command, include:  
--a – archive, never follow symbolic links, preserve links, copy directories recursively  
--f – if an existing destination file cannot be opened, remove it and try again  
--i – prompt before overwriting an existing file  
--r – copy directories recursively  
+
+    -a – archive, never follow symbolic links, preserve links, copy directories recursively  
+    -f – if an existing destination file cannot be opened, remove it and try again  
+    -i – prompt before overwriting an existing file  
+    -r – copy directories recursively  
 
 ```bash
 # Copying a single file to a destination directory
@@ -109,10 +162,11 @@ mv [options] source destination
 mv [options] source1 source2 [...] destination
 ```
 
-Common options used with the mv command:  
--f – do not prompt before overwriting  
--i – prompt before overwrite  
--u – move only when the source file is newer than the destination file or when the destination file is missing  
+Common options used with the mv command: 
+
+    -f – do not prompt before overwriting  
+    -i – prompt before overwrite  
+    -u – move only when the source file is newer than the destination file or when the destination file is missing  
 
 Note 1: that if the destination exists, it will be overwritten unless the -i option is used.  
 
@@ -180,18 +234,19 @@ less filename.ext
 ```
 
 Option for less and more:  
--g               # highlight serch, lasta match  
--G               # highlight serch  
--s               # sqeeze long lines  
--S               # chop-long-lines  
-q                # quit reading file  
-enter or ▼       # forward one line  
-▲                # backward one line  
-f or space       # forward one window  
-b                # backward one window  
-/pattern         # search for a parttern forward  
-?pattern         # search for a pattern backward  
-&pattern         # display only matching lines  
+
+    -g               # highlight serch, lasta match  
+    -G               # highlight serch  
+    -s               # sqeeze long lines  
+    -S               # chop-long-lines  
+    q                # quit reading file  
+    enter or ▼       # forward one line  
+    ▲                # backward one line  
+    space or f       # forward one window  
+    b                # backward one window  
+    /pattern         # search for a parttern forward  
+    ?pattern         # search for a pattern backward  
+    &pattern         # display only matching lines  
 
 With the file opened with less or more, is possible to search for pattenrs or go to a specific line in it  
 ```bash
@@ -204,13 +259,14 @@ ctrl + shift + - and choose the line number
 
 
 ## Uses of regular expression
-```bash
-*       # Any kind of character one or more times
-?       # Any kind of character one time
-[0-9]   # Any number character
-[a-z]   # Any alphabetic character
-{pattern1,pattern2,etc.}.png
 
+    *       # Any kind of character one or more times
+    ?       # Any kind of character one time
+    [0-9]   # Any number character
+    [a-z]   # Any alphabetic character
+    {pattern1,pattern2,etc.}.png
+
+```bash
 ls *
 ls *.png
 ls [0-9]*.png           # find a match which have a number repeated mulpliple times. Such as 111.png, 90876.png etc.
@@ -224,12 +280,12 @@ ls {file1,file2}.png
 
 option:
 
--c, --stdout    = compress but, write on standard output, keep original files unchanged  
--k, --keep       = keep (don't delete) input files  
--d, --decompress = decompress  
--t, --test       = test compressed file integrity  
--v, --verbose    = verbose mode  
--l, --list       = list compressed file contents  
+    -c, --stdout    = compress but, write on standard output, keep original files unchanged  
+    -k, --keep       = keep (don't delete) input files  
+    -d, --decompress = decompress  
+    -t, --test       = test compressed file integrity  
+    -v, --verbose    = verbose mode  
+    -l, --list       = list compressed file contents  
 
 ```bash
 # To compress
@@ -255,14 +311,15 @@ Sintax:
 tar [opções] grouped_name.tar [files]  
 
 Options command:  
--c : creates a new tar file.  
--t : list the content of tar file.  
--x : extract the content of tar.  
--v : "verbose" show mensagens of what is happening.  
--f file : defines the name of the tar file.  
--z ou −−gzip ou −−gunzip : compress/uncompress files using gzip/gunzip.  
--j ou −−bzip2 : compress/uncompress using bzip2.
--?, −−help : mostra as opções do comando.  
+
+    -c : creates a new tar file.  
+    -t : list the content of tar file.  
+    -x : extract the content of tar.  
+    -v : "verbose" show mensagens of what is happening.  
+    -f file : defines the name of the tar file.  
+    -z ou −−gzip ou −−gunzip : compress/uncompress files using gzip/gunzip.  
+    -j ou −−bzip2 : compress/uncompress using bzip2.
+    -?, −−help : mostra as opções do comando.  
 
 ```bash
 # To creates a file colection_txt with group all txt files in the pwd.
@@ -325,9 +382,9 @@ It can be used to cut parts of a line by delimiter, byte position, and character
 
 Options:  
 
-* -f (--fields = LIST)______ # Select by specifying a field, a set of fields, or a range of fields.  
-* -d (--delimiter)__________ # Specify a delimiter that will be used instead of the default “TAB” delimiter..  
-* -c (--characters = LIST)__ # Select by specifying a character, a set of characters, or a range of characters..  
+    -f (--fields = LIST)______ # Select by specifying a field, a set of fields, or a range of fields.  
+    -d (--delimiter)__________ # Specify a delimiter that will be used instead of the default “TAB” delimiter..  
+    -c (--characters = LIST)__ # Select by specifying a character, a set of characters, or a range of characters..  
 
 The LIST argument passed to the -f, -b, and -c options can be an integer, multiple integers separated by commas, a range of integers
 or multiple integer ranges separated by commas.
@@ -380,12 +437,13 @@ egrep "pattern1|parttern2" file
 Description:  
 counts the number of lines, words and characteres of a file.
 
-options:  
--c : counts bytes.  
--l : counts lines.  
--L : show the lenght of longest line.
--m : counts characteres.
--w : counts words.
+options: 
+
+    -c : counts bytes.  
+    -l : counts lines.  
+    -L : show the lenght of longest line.
+    -m : counts characteres.
+    -w : counts words.
 
 ```bash
 wc [option] [file]  
@@ -401,12 +459,14 @@ Usage:
 sed OPTIONS... [SCRIPT] [INPUTFILE...]
 
 options:
--i ------> change the file in place
--e ------> print without changing the file
--n ------> show just the result of the command
-s -------> replace a pattern for another
-p -------> p at the end, prints
-g -------> g at the end, change all accurrences
+
+    -i ------> change the file in place
+    -e ------> print without changing the file
+    -n ------> show just the result of the command
+    s -------> replace a pattern for another
+    p -------> p at the end, prints
+    g -------> g at the end, change all accurrences
+
 
 Sed command is mostly used to replace the text in a file. 
 ```bash
@@ -510,12 +570,14 @@ sudo apt install tree
 ```
 
 Algumas opções do comando:  
--a : lista todos os arquivos, inclusive os arquivos ocultos.  
--d : lista somente os subdiretórios.  
--f : exibe o caminho completo dos arquivos.  
--p : exibe as permissões dos arquivos.  
-−−help : exibe as opções do utilitário.  
-−−version : mostra informações sobre o utilitário.  
+
+    -a : lista todos os arquivos, inclusive os arquivos ocultos.  
+    -d : lista somente os subdiretórios.  
+    -f : exibe o caminho completo dos arquivos.  
+    -p : exibe as permissões dos arquivos.  
+    −−help : exibe as opções do utilitário.  
+    −−version : mostra informações sobre o utilitário.  
+
 
 ```bash
 tree -d # lista os diretórios do pwd
@@ -530,13 +592,14 @@ Wget provides a number of options allowing you to download multiple files, resum
 download in the background, mirror a website, and more.
 
 Options:  
--nv ------> non verbose
--O -------> Saving the downloaded file under different name 
--P -------> Download the file into a specific directory
--c -------> Resuming a download from the previous one
--b -------> Downloading in background
--i -------> Downloading multiple files (this options need to be followed by the path to a local or external file containing a list of the
-URLs to be downloaded. Each URL needs to be on a separate line).
+
+    -nv ------> non verbose
+    -O -------> Saving the downloaded file under different name 
+    -P -------> Download the file into a specific directory
+    -c -------> Resuming a download from the previous one
+    -b -------> Downloading in background
+    -i -------> Downloading multiple files (this options need to be followed by the path to a local or external file containing a list of the 
+    URLs to be downloaded. Each URL needs to be on a separate line).
 
 
 Downloading files from internet
