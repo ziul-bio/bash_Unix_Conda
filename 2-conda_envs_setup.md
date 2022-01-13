@@ -1,12 +1,18 @@
 # Setting Up a Conda Enviroments For Bioinformatics
+Autor: Luiz Carlos  
+Data: 31/12/2021  
 
-Conda is a package and environment manager.  
+## Conda 
 
-An environment consists of a certain Python version and some packages.   
+Conda is an open source package management system and environment management system that runs on Windows, macOS and Linux. 
+Conda quickly installs, runs and updates packages and their dependencies. Conda easily creates, saves, loads and switches between environments on your local computer. It was created for Python programs, but it can package and distribute software for any language.
 
-Thus, you can create different enviroments (env) and use a different Python or package version in diferent projects.  
+Conda is also included in Anaconda Enterprise, which provides on-site enterprise package and environment management for Python, R, Node.js, Java and other application stacks. [¹](https://docs.conda.io/en/latest/)
+
 
 #### Why???
+
+An environment consists of a certain Python version and some packages. 
 
 In bioinformatics, most of the packages used are mantained by studants in Universities, and some of them evolve and update slowly than versions of python.   
 
