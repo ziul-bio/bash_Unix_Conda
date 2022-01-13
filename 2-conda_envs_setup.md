@@ -1,11 +1,25 @@
 # Setting Up a Conda Enviroments For Bioinformatics
 
+Conda is a package and environment manager.  
+
+An environment consists of a certain Python version and some packages.   
+
+Thus, you can create different enviroments (env) and use a different Python or package version in diferent projects.  
+
+#### Why???
+
+In bioinformatics, most of the packages used are mantained by studants in Universities, and some of them evolve and update slowly than versions of python.   
+
+Then, we can end up needing to use some of the outdate bioinfo packages that are not supported by newer version of python.  
+
+Conda allow us to create a enviroment with the version of python requeried for programs to work propetly.  
+
 ## Download miniconda
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh
 ```
 
-## install Miniconda
+## Install Miniconda
 ```bash
 bash Miniconda3-py39_4.10.3-Linux-x86_64.sh
 ```
@@ -13,9 +27,7 @@ bash Miniconda3-py39_4.10.3-Linux-x86_64.sh
 By default, miniconda will be installed at the home directoty.
 To verify if every thing were installed and configured correctly, type the command:  
 ```bash
-source ~/.bashrc
-
-# or reinitiate the terminal.
+source ~/.bashrc     # or reinitiate the terminal.
 ```
 This command will activate the conda enviroment(Base) into the terminal, showing base at the left most side of the line.
 Then, if everything goes correctly, there will be no need to type this command for future use.
@@ -61,85 +73,148 @@ conda config --append channels conda-forge
 This will avoid channel collisions.
 
 
-# Create a conda Enviroment
+# Use of conda
+
+Remenbering, conda is a tool for manage environments and packages.
+
+### Usage:
+
+	conda command --help -----> This will show help for the specific command
+
+### Usefull commands:
+
+    create       Create a new conda environment from a list of specified packages.
+    help         Displays a list of available conda commands and their help strings.
+    info         Display information about current conda install.
+    install      Installs a list of packages into a specified conda environment.
+    list         List linked packages in a conda environment.
+    remove       Remove a list of packages from a specified conda environment.
+    search       Search for packages and display associated information. The input is a MatchSpec, a query language for conda packages.
+    update       Updates conda packages to the latest compatible version.
+
+### Options:
+
+	-h, --help                         = Show this help message and exit.
+	-all                               = Apply the command to all package in the env.
+	-n ENVIRONMENT, --name ENVIRONMENT = Name of environment.
+	-c CHANNEL, --channel CHANNEL      = Additional channel to search for packages.
+	-y, --yes                          = Do not ask for confirmation.
+	--force-reinstall                  = Ensure that any user-requested package for the current operation is uninstalled and reinstalled, even if that package already      exists in the environment.
+
 
 ## Creating a conda enviroment:
 ```bash
 conda create -n myenv python=3.8
 
 conda activate myenv
+```
 
-# Commands to list the envs available
+
+## List the envs available
+```bash
 conda info --envs
 
 conda env list
+
+# to list the package intalled in the enviroment
+conda list -n myenv
 ```
 
-# Removing Enviroments
+
+## Removing Enviroments
 
 ```bash
-conda env remove -n myenv
-
 conda remove --name myenv --all
+
+conda env remove -n myenv
 ```
 
 
 # Instaling Packages
 
-### Install SRA Toolskit:
-The RSA Toolskit is a collection of tools and libraries for using data in the INSDC Sequence Read Archives.
+## Search gor a package
 ```bash
-conda install -c bioconda sra-tools
-
-# versão mais recente
-conda install -c bioconda/label/cf201901 sra-tools 
+conda search fastqc
 ```
+
+output:
+
+	Loading channels: done
+	# Name                       Version           Build  Channel
+	fastqc                        0.10.1               0  bioconda
+	fastqc                        0.10.1               1  bioconda
+	 ...                           ...                      ...
+	fastqc                        0.11.8               0  bioconda
+	fastqc                        0.11.8               1  bioconda
+	fastqc                        0.11.8               2  bioconda
+	fastqc                        0.11.9               0  bioconda
+	fastqc                        0.11.9      hdfd78af_1  bioconda
+
+
+## Installing packages
+
+### Install fasqc
+```bash
+# Conda search in the available channels, previewlly seted up.
+conda install fastqc
+
+# This command, conda will search for the package at the bioconda channel
+conda install -c bioconda fastqc
+```
+
+### Install MultiQC
+```bash
+conda install multiqc
+
+# to install a specific package in an specific env
+conda install -n myenv multiqc
+```
+
+
+### Install samtools
+```bash
+# This command will install the last version
+conda install samtools   
+
+# -- version 1.13 - stable and working with python 3.8
+
+# If we face any problem, install samtools 1.9, downgrade it to the latest stable build: tested 23/12/2021
+conda install -c bioconda samtools=1.9 --force-reinstall
+```
+
+
+### Install hisat2
+
+In the site of Anaconda.org [at packages](https://anaconda.org/bioconda/hisat2/labels) is possible to choose from diferent labels.
+
+	label       Version
+	cf201901	2.1.0
+	main	    2.2.1
+
+
+```bash
+# Installing main version
+conda install -c bioconda hisat2
+
+# Installing labeled version nº cf201901
+conda install -c bioconda/label/cf201901 hisat2
+```
+
 
 ### Install biopython:
 ```bash
 conda install -c conda-forge biopython
-conda update -c conda-forge biopython
 
 # the recomendations is to install all packages with the same package manager, but if it not available, do:
 pip install biopython
 ```
 
-## install fasqc
+
+# Update an package (biopython)
 ```bash
-conda install fastqc
-conda install -c bioconda fastqc
-conda update fastqc
-```
+conda update package_name
 
-## Install MultiQC
-```bash
-conda install multiqc
-```
-
-## Install hisat2
-```bash
-conda install -c bioconda hisat2
-conda install -c bioconda/label/cf201901 hisat2
-```
-
-### Install samtools
-
-```bash
-# -- version 1.13 - stable. but not available any more
-conda install samtools   
-
-# Lastest version1.7 ***com problemas
-$ conda install -c bioconda/label/cf201901 samtools
-
-# work around - install samtools 1.7 and then, update it to the latest build: tested 23/12/2021
-$ conda install -c bioconda samtools=1.9 --force-reinstall
-```
-
-### installing featureCounts
-featureCounsts is a subpackage of subread
-
-```bash
-conda install -c bioconda subread
+conda update -c conda-forge biopython
 ```
 
 
@@ -154,7 +229,6 @@ To remove a packages such as samtools or any other in other environment:
 ```bash
 conda remove -n env_name samtools
 ```
-
 
 
 # Uninstalling Anaconda or Miniconda
