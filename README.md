@@ -25,9 +25,9 @@ Nowaday days, works as an independent biological data analyst/bioinformatician.
 This way, it is possible that we have access to a Linux terminal inside Windows. As many tools developed for bioinformatics are built natively for Unix systems,
 we will install WSL to take advantage of these programs. 
 
-* [Conda](https://github.com/ziul-bio/bash_Unix_Conda/blob/main/2-Conda_envs_setup.md) is a tool for manage environments and packages, very usefull whem we need to work with diferent versions os programming languages and softwares
+* [Conda](https://github.com/ziul-bio/bash_Unix_Conda/blob/main/2-conda_envs_setup.md) is a tool for manage environments and packages, very usefull whem we need to work with diferent versions os programming languages and softwares
 
-* [Bash_Unix_command_line](https://github.com/ziul-bio/bash_Unix_Conda/blob/main/3-Bash_Unix_commands.md) Bash is a Unix shell and command language written by Brian Fox for the GNU Project as a free software.
+* [Bash_Unix_command_line](https://github.com/ziul-bio/bash_Unix_Conda/blob/main/3-bash_Unix_commands.md) Bash is a Unix shell and command language written by Brian Fox for the GNU Project as a free software.
 It has been used as the default login shell for most Linux distributions. A version is also available for Windows 10 and 11 via WSL.
 Here, I share a list of most used commands, to make ours lives a bit easier in the daily basis, when working in the command line. 
 
