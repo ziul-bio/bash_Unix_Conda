@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img src="banner.png" >
+  <img src="images/banner.png" >
 </p>
 
 # Luiz Carlos Vieira
