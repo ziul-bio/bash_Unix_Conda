@@ -31,7 +31,7 @@ we will install WSL to take advantage of these programs.
 It has been used as the default login shell for most Linux distributions. A version is also available for Windows 10 and 11 via WSL.
 Here, I share a list of most used commands, to make ours lives a bit easier in the daily basis, when working in the command line. 
 
-* Feel here to use all and share some contribuition to improve them too.
+* Feel free to use all and share some contribuition to improve them too.
 
 ---
 
