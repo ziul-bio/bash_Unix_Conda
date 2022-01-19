@@ -37,13 +37,13 @@ These letters "ugoa" in the command chmod definy which of the user will have the
     o : any other user (others);
     a : all user of the system (all).
 
-If none is passes to the command, the system will use all as default.
+If none is passed to the command, the system will uses all as default.
 
 ### Operators
 
 With the command chmod, has to be used with a operator, to specify the kind of permission which will be given.
 
-    * : Grants the permission. The permission is added to the existing permissions;
+    + : Grants the permission. The permission is added to the existing permissions;
     – : remove permissions specified;
     = : Set a permission and remove others.
 
@@ -59,16 +59,17 @@ Checking the permission
 ```bash
 ls -l file.txt
 ```
-output: I separate them to a better visualization:
+
+output: I separated them to a better visualization:
 
     - rwx rw- r-- 1 luiz luiz 6kb Jan 12 14:38 file.txt
     d rwx rwx rw- 1 luiz luiz 6k Jan 12 14:38 data
 
-where the first fild "-"" means the file is not a directory, like in the seconda exemple, represented by "d".
+where the first fild "-" means the file is not a directory, like in the seconda exemple, represented by "d".  
 
-The seconda fild "rwx", represent the permissions for the user;
-The third fild "rw-", represents the permissions for others;
-And the forth fild "r--", represents the permissions to all
+The seconda fild "rwx", represent the permissions for the user;  
+The third fild "rw-", represents the permissions for others;  
+And the forth fild "r--", represents the permissions to all.  
 
 ### Setting a permissions
 ```bash
