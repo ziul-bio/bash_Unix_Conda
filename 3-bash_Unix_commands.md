@@ -31,6 +31,7 @@ chmod [mode] [operator] [permission] file.ext
 ### Mode ugoa
 
 These letters "ugoa" in the command chmod definy which of the user will have ther permissions modified.
+
     u : Owner of the file (user);
     g : Members of the group the file belongs (Groups);
     o : any other user (others);
@@ -41,6 +42,7 @@ If none is passes to the command, the system will use all as default.
 ### Operators
 
 With the command chmod, has to be used with a operator, to specify the kind of permission which will be given.
+
     * : Grants the permission. The permission is added to the existing permissions;
     – : remove permissions specified;
     = : Set a permission and remove others.
