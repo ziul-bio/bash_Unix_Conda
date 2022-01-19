@@ -21,6 +21,66 @@ clear               # clear command prompt
 cat filename.ext    # to show or execute the file
 ```
 
+## CHMOD
+
+This command modify files permissions, controling who can access files, search directories, and run scripts.
+
+### Usage:
+chmod [mode] [operator] [permission] file.ext
+
+### Mode ugoa
+
+These letters "ugoa" in the command chmod definy which of the user will have ther permissions modified.
+    u : Owner of the file (user);
+    g : Members of the group the file belongs (Groups);
+    o : any other user (others);
+    a : all user of the system (all).
+
+If none is passes to the command, the system will use all as default.
+
+### Operators
+
+With the command chmod, has to be used with a operator, to specify the kind of permission which will be given.
+    * : Grants the permission. The permission is added to the existing permissions;
+    – : remove permissions specified;
+    = : Set a permission and remove others.
+
+### Values
+    r : The read permission.
+    w : The write permission.
+    x : The execute permission.
+
+
+### Setting And Modifying Permissions
+
+Checking the permission
+```bash
+ls -l file.txt
+```
+output: I separate them to a better visualization:
+
+    - rwx rw- r-- 1 luiz luiz 6kb Jan 12 14:38 file.txt
+    d rwx rwx rw- 1 luiz luiz 6k Jan 12 14:38 data
+
+where the first fild "-"" means the file is not a directory, like in the seconda exemple, represented by "d".
+
+The seconda fild "rwx", represent the permissions for the user;
+The third fild "rw-", represents the permissions for others;
+And the forth fild "r--", represents the permissions to all
+
+### Setting a permissions
+```bash
+# removing permission to write and execute to group and others
+chmod go-wx file.txt
+
+# set only permission to read and write to group and others
+chmod go=rw file.txt
+
+# Add permission to execute to group and others
+chmod go+x file.txt
+```
+
+
 ## Running scripts
 ```bash
 # simple run
