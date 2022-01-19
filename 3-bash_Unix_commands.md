@@ -100,7 +100,7 @@ nohup sh script.sh >& script.log.txt &
 
 ```
 
-## Running scripts with a conda env setup
+### Running scripts with a conda env setup
 This kind of running is required when we need to activate a conda env, where all the programs needed to run the script are.
 
 ### Exemple of script
@@ -176,6 +176,7 @@ Mandatory arguments to long options are mandatory for short options too:
     -p, --parents     # no error if the diretory already exist, make parent directories as needed
     -v, --verbose     # print a message for each created directory
 
+
 ## Remove files and directories
 ```bash
 rmdir dir_name # remove directory if its empty
@@ -241,7 +242,8 @@ Note 1: that if the destination exists, it will be overwritten unless the -i opt
 
 Note 2: If a file or directory is moved to a new name within the same directory, it is effectively renamed.   
 
-### Rename a file
+
+## Rename a file
 ```bash
 mv -i oldname newname
 ```
@@ -345,16 +347,17 @@ ls {file1,file2}.png
 
 ```
 
+
 ## Compress and Uncompress files
 
-option:
-
+### option:
     -c, --stdout    = compress but, write on standard output, keep original files unchanged  
     -k, --keep       = keep (don't delete) input files  
     -d, --decompress = decompress  
     -t, --test       = test compressed file integrity  
     -v, --verbose    = verbose mode  
     -l, --list       = list compressed file contents  
+
 
 ```bash
 # To compress
@@ -389,6 +392,7 @@ Options command:
     -z ou −−gzip ou −−gunzip : compress/uncompress files using gzip/gunzip.  
     -j ou −−bzip2 : compress/uncompress using bzip2.
     -?, −−help : mostra as opções do comando.  
+
 
 ```bash
 # To creates a file colection_txt with group all txt files in the pwd.
