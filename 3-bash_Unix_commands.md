@@ -583,14 +583,23 @@ Filds in awk
 awk represent a line as a record and is represented as NR1, NR2, NR3 till length of file. 
 And each record is splited in fild by whitespace and stored variable called $1, $2, $3 ... and $0 is a entire line.
 
+Options:
+
+    -F or --field-separator=fs modify the fild of separator.
+
 Syntax:  
 
-    awk [options] "pattern {action}" input_file > output_file
-    awk '{sum += $1 }; END { print sum }' file
+    awk [options] "pattern {action}" input_file.ext > output_file
+    awk -F: '/pattern/ { print $0 }' input_file.ext > output_file
 
-The option -F or --field-separator=fs modify the fild of separator.
+    # In case below, no pattern was used, than the action will be aplied to all record/lines.
+    awk '{sum += $1 }; END { print sum }' input_file.ext > output_file
 
-    awk -F: '/pattern/ { print $0 }' input_file.ext
+
+The 1 at the end of the program, is a condition (always true) with no action, so it executes the default action for every line, printing the line (which may have been modified by the previous action in braces or not).
+
+    awk '/^>/ {$0= "> new name"}1' teste.txt > teste.txt
+    awk '/^>/ {$0= "> new name"} {print $0}' teste.txt > teste.txt # this has the same effect.
 
 
 Usage:
