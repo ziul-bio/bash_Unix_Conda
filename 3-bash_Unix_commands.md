@@ -1,4 +1,3 @@
-
 # UNIX commands used in bioinformatics
 Autor: Luiz Carlos  
 Data: 31/12/2021
@@ -19,119 +18,8 @@ pwd                 # Currently working directory
 history             # list of command used. It's possible to use arrow down and up to show the last 100 comands.
 clear               # clear command prompt
 cat filename.ext    # to show or execute the file
-```
-
-## CHMOD
-
-This command modify files permissions, controling who can access files, search directories, and run scripts.
-
-### Usage:
-chmod [mode] [operator] [permission] file.ext
-
-### Mode ugoa
-
-These letters "ugoa" in the command chmod definy which of the user will have ther permissions modified.
-
-    u : Owner of the file (user);
-    g : Members of the group the file belongs (Groups);
-    o : any other user (others);
-    a : all user of the system (all).
-
-If none is passed to the command, the system will uses all as default.
-
-### Operators
-
-With the command chmod, has to be used with a operator, to specify the kind of permission which will be given.
-
-    + : Grants the permission. The permission is added to the existing permissions;
-    – : remove permissions specified;
-    = : Set a permission and remove others.
-
-### Values
-    r : The read permission.
-    w : The write permission.
-    x : The execute permission.
-
-
-### Setting And Modifying Permissions
-
-Checking the permission
-```bash
-ls -l file.txt
-```
-
-output: I separated them to a better visualization:
-
-    - rwx rw- r-- 1 luiz luiz 6kb Jan 12 14:38 file.txt
-    d rwx rwx rw- 1 luiz luiz 6k Jan 12 14:38 data
-
-where the first fild "-" means the file is not a directory, like in the seconda exemple, represented by "d".  
-
-The seconda fild "rwx", represent the permissions for the user;  
-The third fild "rw-", represents the permissions for others;  
-And the forth fild "r--", represents the permissions to all.  
-
-### Setting a permissions
-```bash
-# removing permission to write and execute to group and others
-chmod go-wx file.txt
-
-# set only permission to read and write to group and others
-chmod go=rw file.txt
-
-# Add permission to execute to group and others
-chmod go+x file.txt
-```
-
-
-## Running scripts
-```bash
-# simple run
-bash script.sh
-
-# Run in second plan
-bash script.sh &
-
-# redirect both stdout and stderr to file.log.txt
-bash script.sh >& script.log.txt
-
-# to run the scrip withou hang up, redirect both stdout and stderr to file.log.txt and run in second plan
-nohup sh script.sh >& script.log.txt &
-
-```
-
-### Running scripts with a conda env setup
-This kind of running is required when we need to activate a conda env, where all the programs needed to run the script are.
-
-### Exemple of script
-I do recommend not use any kind of characters as (_ , - , /) in the script name.
-
-At the top of the script, starts as follow:
-
-    #!/usr/bin/env bash                # shabang sign - Tells the operating system which interpreter to use. 
-    set -o errexit                     # This will exit, if any erro happens.
-    conda activate genomics            # This will activate the env we need to execute the script, change for the one you have.
-    
-    command 1
-    command 2
-    command 3
-
-
-Before run any command, let's ussume we have a env called genomics, and there are all the programs needed to execute the following script.
-```bash
-# Note: this script starts as showed above.
-
-# running in interactive mode.
-bash -i script2.sh
-
-# redirect both stdout and stderr to file.log.txt
-bash -i script2.sh >& script2.log.txt
-
-
-# Now, let's assume we don't wrote in the script to activate genomics
-# We can open the terminal and do as follow:
-conda activate genomics
-./script2.sh >& script2.log.txt    # This comand will run the script interacting if the current env.
+htop or top         # to get memory and cpu usage info. Press q to exit
+lscpu               # to get system info, like total memory, number of cpus and threads, architecture, model of the processor etc.
 
 ```
 
@@ -306,30 +194,40 @@ less filename.ext
 
 Option for less and more:  
 
-    -g               # highlight serch, lasta match  
+    -g               # highlight serch, last match  
     -G               # highlight serch  
-    -s               # sqeeze long lines  
-    -S               # chop-long-lines  
-    q                # quit reading file  
-    enter or ▼       # forward one line  
-    ▲                # backward one line  
-    space or f       # forward one window  
-    b                # backward one window  
+    -s               # squeze long lines  
+    -S               # chop-long-lines 
+
+MOVING:
+
+    e or ▼           # forward one line  
+    y or ▲           # backward one line  
+    f or space       # forward one window  
+    b                # backward one windown
+
+SEARCHING:
+
     /pattern         # search for a parttern forward  
     ?pattern         # search for a pattern backward  
-    &pattern         # display only matching lines  
+    &pattern         # display only matching lines 
 
-With the file opened with less or more, is possible to search for pattenrs or go to a specific line in it  
-```bash
-\>
-5555g
+JUMPING
 
-# with nano 
-ctrl + shift + - and choose the line number
-```
+    g - ESC-<        # Go to first line in file (or line N).
+    10g              # Jump to a specific line forward.
+    G - ESC->        # Go to last line in file (or line N).
+    10G              # Jump to a specific line backward.
 
+In nano 
 
-## Uses of regular expression
+    ctrl + shift + - and choose the line number
+
+Exit
+
+    q                # quit reading file
+
+## Uses of regular expression - regex
 
     *       # Any kind of character one or more times
     ?       # Any kind of character one time
@@ -337,6 +235,7 @@ ctrl + shift + - and choose the line number
     [a-z]   # Any alphabetic character
     {pattern1,pattern2,etc.}.png
 
+Usage:
 ```bash
 ls *
 ls *.png
@@ -348,9 +247,102 @@ ls {file1,file2}.png
 ```
 
 
+## Global regular Expression print - GREP
+
+Description:
+
+grep  searches  for  PATTERNS in each FILE.  PATTERNS is one or more patterns separated by newline characters,
+and grep prints each line that matches a pattern.  Typically PATTERNS should be quoted when grep is used in  a
+shell command.
+
+A  FILE  of  “-”  stands  for  standard  input.   If  no FILE is given, recursive searches examine the working
+directory, and nonrecursive searches read standard input.
+
+In addition, the variant programs egrep, fgrep and rgrep are  the  same  as  grep -E,  grep -F,  and  grep -r,
+respectively.  These variants are deprecated, but are provided for backward compatibility.
+
+Sintax:
+
+    grep [OPTION] PATTERNS [FILE]
+    grep [OPTION] -e PATTERNS [FILE]
+    grep [OPTION] -f PATTERN_FILE [FILE]
+
+
+Options:
+
+    -e PATTERNS, --regexp=PATTERNS 
+        Use PATTERNS as the patterns. If this option is used multiple times or is combined with the -f (--file) option, 
+        search for all patterns given. This option can be used to protect a pattern beginning with “-”.
+    -f FILE, --file=FILE
+        Obtain patterns from FILE, one per line.  If this option is used multiple times or is combined with the -e  (--regexp)  option,
+        search  for  all  patterns  given.  The empty file contains zero patterns, and therefore matches nothing.
+    -i, --ignore-case
+        Ignore case distinctions in patterns and input data, so that characters that differ only in case  match each other.
+    -v, --invert-match
+        Invert the sense of matching, to select non-matching lines.
+    -c, --count
+        Suppress normal output; instead print a count of matching lines for each input file. With the -v, count non-matching lines.
+    -o, --only-matching
+        Print  only  the matched (non-empty) parts of a matching line, with each such part on a separate output line.
+    -n, --line-number
+        Prefix each line of output with the 1-based line number within its input file.
+    -P, --perl-regexp
+        Interpret  PATTERNS  as  Perl-compatible regular expressions (PCREs). This option is experimental when combined with 
+        the -z (--null-data) option, and grep -P may warn of unimplemented features.
+
+Usage:
+```bash
+grep pattern file.ext
+
+# find a pattern in all files.txt
+grep "pattern" *.txt
+
+# return the line number of the pattern
+grep -n "pattern" file.ext
+
+# Counts the occurences of the pattern
+grep -c "pattern" file.ext
+
+# to ignore case sensitive
+grep -i "PatTern" file.ext
+
+# to grep all except the pattern
+grep -v "pattern" filename
+
+# to grep multiple patterns
+grep "[I,D]"
+
+# to grep multiple patterns with extended expression
+egrep "pattern1|parttern2" file
+
+grep -e "pattern1" -e "pattern2" file
+```
+
+Usage with --perl-regexp patterns
+
+    \d = digit character
+    \D = non digit character
+    \t = tab delimited
+    \n = end line, equal to $
+    \w = word
+    \W = non word
+    \s = whitespace
+    \S = non whitespace
+    .  = any character
+    +  = 1 or more character
+    *  = zero or more characteres
+
+
+```bash
+grep -P "^ID=\d+" 
+grep -P "ID=\d+\tName:\w" file.ext
+```
+
+
 ## Compress and Uncompress files
 
-### option:
+Option:
+
     -c, --stdout    = compress but, write on standard output, keep original files unchanged  
     -k, --keep       = keep (don't delete) input files  
     -d, --decompress = decompress  
@@ -361,15 +353,17 @@ ls {file1,file2}.png
 
 ```bash
 # To compress
-gzip file_name
-bzip file_name
-
+gzip --keep file_name.ext
 
 # Uncompress files
 gunzip -k file_name
 gzip -d file_name
 
-bunzip file_name
+
+# to compress and decompress using bcftools util
+bgzip -c file_name.ext > filename.ext.gz 
+
+bunzip file_name.ext.gz
 
 ```
 
@@ -427,7 +421,12 @@ du -sh          # size of pwd
 du -sh dir_name
 ```
 
+
 ## sort
+
+Write sorted concatenation of all FILE(s) to standard output.
+
+With no FILE, or when FILE is -, read standard input.
 ```bash
 # Defualt alphabetically
 sort filename
@@ -446,6 +445,9 @@ sort -k 2 -k 3 filename
 
 # sort uniquely
 sort -u filename
+
+# sort in reverse order
+sort -r filename              
 ```
 
 ## cut
@@ -471,8 +473,11 @@ cut -f 1,7-10 featurecounts.txt > counts.txt
 cut -d ' ' -f 1,7-10 featurecounts.txt > counts.txt
 ```
 
-## uniq
-return unique lines, if consecutive occurances are found in sequence
+## Return unique lines with UNIQ
+
+Return unique lines, if consecutive occurances are found in sequence
+
+Usage:
 ```bash
 uniq filename
 
@@ -480,35 +485,11 @@ uniq filename
 uniq -c filename
 ```
 
-## grep
-```bash
-grep pattern file.ext
-
-# find a pattern in all files.txt
-grep "pattern" *.txt
-
-# return the line number of the pattern
-grep -n "pattern" file.ext
-
-# Counts the occurences of the pattern
-grep -c "pattern" file.ext
-
-# to grep all except the pattern
-grep -v "pattern" filename
-
-# to grep multiple patterns
-grep -e "pattern1" -e "pattern2" file
-
-grep "[I,D]"
-
-egrep "pattern1|parttern2" file
-
-```
 
 ## WC
 
 Description:  
-counts the number of lines, words and characteres of a file.
+Counts the number of lines, words and characteres of a file.
 
 options: 
 
@@ -523,7 +504,8 @@ wc [option] [file]
 wc -l file
 ```
 
-## sed
+
+## Stream Editor - SED
 
 SED command in UNIX stands for stream editor and it can perform lots of functions on file like searching, find and replace, insertion or deletion.
 
@@ -581,7 +563,67 @@ sed -n '6,9p' file.txt
 [link for more exemples](https://terminalroot.com.br/2015/07/30-exemplos-do-comando-sed-com-regex.html)
 
 
-## comm
+## AWK
+
+Awk is a pattern scanning and processing language for manipulating data reports.
+Awk allows us to use variables, numerif funcions, string functions, and logical operators.
+
+With this utility is possible to write programs in form of statements that define text patterns to be searched.
+By default it reads standard input and writes standard output.
+
+Useful to:  
+
+* Transform data
+* Produce formated reports
+* Performs condicional and loops
+* Perform arithmetic and strings operations
+
+Filds in awk
+
+awk represent a line as a record and is represented as NR1, NR2, NR3 till length of file. 
+And each record is splited in fild by whitespace and stored variable called $1, $2, $3 ... and $0 is a entire line.
+
+Syntax:  
+
+    awk [options] "pattern {action}" input_file > output_file
+    awk '{sum += $1 }; END { print sum }' file
+
+The option -F or --field-separator=fs modify the fild of separator.
+
+    awk -F: '/pattern/ { print $0 }' input_file.ext
+
+
+Usage:
+
+```bash
+# Searches for a pattern in a file, and prints the line
+awk "/pattern/ {print}" input_file
+
+# Searches for a pattern in a file, and prints the fild 1 and 4
+awk "/pattern/ {print $1, $4}" input_file
+
+# Print the line if the fild 1 ==A and fild2 == T
+awk '$1 == "A" && $2 =="T"' input_file
+
+# Divide the fild1 by 4 and print it
+awk '{x=$1/4; print x}' input_file
+
+# If the file has a line 3, print the fild 1 and 3
+awk '{if(NR==3) print $1, $2}' input_file
+
+# If the file has a line 7, print a substring of all line, from 2 to end
+awk '{if(NR==7) print substr($0, 2, 100)}' input_file
+
+# declara a variable, and exceute a if statement
+awk '{var=10; if(length($1) > var) print $0}' input_file
+
+# rename a fasfa header
+awk '/^>/ {$0= "> new name"}1' teste.fa > teste.txt
+# the 1 is a pattern; it evaluates to true. The action is not specified, so the default action is invoked, which is {print}
+```
+
+
+## Compare sorted files with COMM
 
 Description:  
 Compare sorted files FILE1 and FILE2 line by line.  
@@ -607,11 +649,72 @@ comm -3 fileA.txt fileB.txt
 
 # Print only lines present in both file1 and file2.
 comm -12 fileA.txt fileB.txt
-
-
 ```
 
- 
+
+## CHMOD
+
+This command modify files permissions, controling who can access files, search directories, and run scripts.
+
+Usage:
+chmod [mode] [operator] [permission] file.ext
+
+Mode ugoa:
+
+These letters "ugoa" in the command chmod definy which of the user will have ther permissions modified.
+
+    u : Owner of the file (user);
+    g : Members of the group the file belongs (Groups);
+    o : any other user (others);
+    a : all user of the system (all).
+
+If none is passed to the command, the system will uses all as default.
+
+Operators:
+
+With the command chmod, has to be used with a operator, to specify the kind of permission which will be given.
+
+    + : Grants the permission. The permission is added to the existing permissions;
+    – : remove permissions specified;
+    = : Set a permission and remove others.
+
+Values:
+
+    r : The read permission.
+    w : The write permission.
+    x : The execute permission.
+
+
+### Setting And Modifying Permissions
+
+Checking the permission
+```bash
+ls -l file.txt
+```
+
+output: I separated them to a better visualization:
+
+    - rwx rw- r-- 1 luiz luiz 6kb Jan 12 14:38 file.txt
+    d rwx rwx rw- 1 luiz luiz 6k Jan 12 14:38 data
+
+where the first fild "-" means the file is not a directory, like in the seconda exemple, represented by "d".  
+
+The seconda fild "rwx", represent the permissions for the user;  
+The third fild "rw-", represents the permissions for others;  
+And the forth fild "r--", represents the permissions to all.  
+
+Setting a permissions
+```bash
+# removing permission to write and execute to group and others
+chmod go-wx file.txt
+
+# set only permission to read and write to group and others
+chmod go=rw file.txt
+
+# Add permission to execute to group and others
+chmod go+x file.txt
+```
+
 
 # For Loop in linux
 
@@ -627,6 +730,60 @@ The doble quote around ${StringArray[@]}, force the whitespaced variable to be r
 ```bash
 StringArray=("Linux Mint" "Fedora" "Red Hat Linux" "Ubuntu" "Debian" ); for val in "${StringArray[@]}"; do echo $val; done
 ```
+
+
+# Running scripts
+```bash
+# simple run
+bash script.sh
+
+# Run in second plan
+bash script.sh &
+
+# redirect both stdout and stderr to file.log.txt
+bash script.sh >& script.log.txt
+
+# to run the scrip withou hang up, redirect both stdout and stderr to file.log.txt and run in second plan
+nohup sh script.sh >& script.log.txt &
+
+```
+
+
+## Running scripts with a conda env setup
+This kind of running is required when we need to activate a conda env, where all the programs needed to run the script are.
+
+### Exemple of script
+I do recommend not use any kind of characters as (_ , - , /) in the script name.
+
+At the top of the script, starts as follow:
+
+    #!/usr/bin/env bash                # shabang sign - Tells the operating system which interpreter to use. 
+    set -o errexit                     # This will exit, if any erro happens.
+    conda activate genomics            # This will activate the env we need to execute the script, change for the one you have.
+    
+    command 1
+    command 2
+    command 3
+
+
+Before run any command, let's ussume we have a env called genomics, and there are all the programs needed to execute the following script.
+```bash
+# Note: this script starts as showed above.
+
+# running in interactive mode.
+bash -i script2.sh
+
+# redirect both stdout and stderr to file.log.txt
+bash -i script2.sh >& script2.log.txt
+
+
+# Now, let's assume we don't wrote in the script to activate genomics
+# We can open the terminal and do as follow:
+conda activate genomics
+./script2.sh >& script2.log.txt    # This comand will run the script interacting if the current env.
+
+```
+
 
 
 # Utilities for bioinformatics
@@ -689,7 +846,6 @@ Download a list of fastq files:
 ```bash
 wget -i urls_fastq_files.txt
 ```
-
 
 
 # Shortcuts
