@@ -2,7 +2,7 @@
 Autor: Luiz Carlos  
 Data: 31/12/2021  
 
-## Conda 
+## Conda
 
 Conda is an open source package management system and environment management system that runs on Windows, macOS and Linux. 
 Conda quickly installs, runs and updates packages and their dependencies. Conda easily creates, saves, loads and switches between environments on your local computer. It was created for Python programs, but it can package and distribute software for any language.
@@ -23,11 +23,13 @@ Conda allow us to create a enviroment with the version of python requeried for p
 ## Download miniconda
 ```bash
 wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.10.3-Linux-x86_64.sh
+wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh
 ```
 
 ## Install Miniconda
 ```bash
 bash Miniconda3-py39_4.10.3-Linux-x86_64.sh
+bash Miniconda3-py39_4.12.0-Linux-x86_64.sh
 ```
 
 By default, miniconda will be installed at the home directoty.
@@ -73,8 +75,8 @@ Conda channel priority is ordered by which channel appears first (highest) in \~
 Doing this conda will seach first at default channels, after bioconda an then conda-forge:
 ```bash
 conda config --add channels defaults
-conda config --append channels bioconda
-conda config --append channels conda-forge
+conda config --add channels bioconda
+conda config --add channels conda-forge
 ```
 This will avoid channel collisions.
 

@@ -86,6 +86,35 @@ Note: If the linux terminal is off, the command above will show:  state = stoppe
 ![wsl-version2](images/wsl-version2.png)
 
 
+### step 6 - rename host name password
+
+
+My new version of ubuntu don't reconnize my password.
+Then I have to change it as root user.
+```bash
+# on CMD prompt, set root as default 
+ubuntu config --default-user root
+
+# on ubuntu prompt, set a new password for the username
+passwd username
+
+# on CMD prompt, set user as default again
+ubuntu config --default-user username
+
+##### on ubuntu prompt:
+# open the file with namo
+sudo nano /etc/hostname
+# Then change the old hostname for the new hostname
+
+sudo nano /etc/hosts
+# Then change the old hosts for the new hosts
+
+# reboot the system
+sudo reboot
+```
+
+
+
 #### 5 Install Windows Terminal (optional - I recommend)
 
 * Using Windows Terminal enables you to open multiple tabs or window panes to display and quickly switch between 
@@ -112,7 +141,7 @@ The follow command must be run in PowerShell as Administrator user.
 ```cmd
 wsl --shutdown
 diskpart
-select vdisk file="C:\Users\"change_for_your_user_name"\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu20.04onWindows_79rhkp1fndgsc\LocalState\ext4.vhdx"
+select vdisk file="C:\Users\change_for_your_user_name\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu20.04onWindows_79rhkp1fndgsc\LocalState\ext4.vhdx"
 attach vdisk readonly
 compact vdisk
 detach vdisk
